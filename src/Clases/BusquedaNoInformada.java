@@ -60,11 +60,33 @@ public class BusquedaNoInformada {
         
     }
     
-    public void mostrarRuta(){
+    public ArrayList<Nodo> obtenerRuta(){
+        
         Nodo solucion = BFS(raiz);
-        for(int i=0; i<solucion.profundidad; i++){
+        ArrayList<Nodo> rama = new ArrayList<>();
+                        
+        Queue<Nodo> aux;
+        aux=new LinkedList();
+        aux.add(solucion);
+        
+        while(!aux.isEmpty()){
             
+            Nodo actual;
+            actual = aux.remove();
+            rama.add(actual);
+            if(actual.padre != null){
+                aux.add(actual.padre);
+            }
         }
+        
+        Collections.reverse(rama);
+        //rama.forEach(x->System.out.print(Arrays.toString(x.estado)));
+        //System.out.println("\n");
+        return rama; 
+    }
+    
+    public void mostrarRuta(ArrayList<Nodo> rama){
+        
         Mapa mapa = new Mapa();
         mapa.iniciarMapa();
         mapa.pintarMapa(matriz);

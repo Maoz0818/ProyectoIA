@@ -12,6 +12,6 @@ public class Main extends JFrame{
     public static void main(String[] args) throws IOException {
         BusquedaNoInformada BNI = new BusquedaNoInformada();
         BNI.guardarMapa();
-        BNI.mostrarRuta();
+        BNI.obtenerRuta();
     }  
 }
