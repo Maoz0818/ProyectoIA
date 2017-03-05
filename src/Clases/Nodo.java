@@ -18,6 +18,6 @@ public class Nodo {
         this.profundidad=profundidad;
         this.costo=costo;
         this.balas=balas;
-    }   
+    }
     
 }

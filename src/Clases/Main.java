@@ -10,8 +10,8 @@ public class Main extends JFrame{
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        BusquedaNoInformada BNI = new BusquedaNoInformada();
+        PreferentePorAmplitud BNI = new PreferentePorAmplitud();
         BNI.guardarMapa();
-        BNI.obtenerRuta();
+        BNI.obtenerSolucion();
     }  
 }

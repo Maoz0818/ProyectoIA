@@ -3,9 +3,9 @@ package Clases;
 import java.io.*;
 import java.util.*;
 
-public class BusquedaNoInformada {
+public class PreferentePorAmplitud {
     
-    int contNodos = 0;
+    int contNodosExpandidosBfs = 0;
     int balas;
     int profundidad = 0;
     int costo = 0;
@@ -13,7 +13,9 @@ public class BusquedaNoInformada {
     Nodo raiz = new Nodo(estadoInicial,null,null,0,0,0);
     Nodo padre = new Nodo();
     String matriz[][] = new String[10][10];
+    String matrizInicial[][] = new String[10][10];
     boolean visitados[][] = new boolean[10][10];
+    long tInicio = 0, tFin = 0, tTotal = 0;
     
     public void guardarMapa() throws FileNotFoundException, IOException {
         
@@ -41,7 +43,6 @@ public class BusquedaNoInformada {
 
             buffer.close();           
         }
-        
         for(int i=0;i<10;i++){
             for(int j=0;j<10;j++){
                 if(matriz[i][j].equals("2")){
@@ -59,7 +60,7 @@ public class BusquedaNoInformada {
         
     }
     
-    public void obtenerRuta(){
+    public void obtenerSolucion(){
         
         Nodo solucion = BFS(raiz);
         ArrayList<Nodo> rama = new ArrayList<>();
@@ -79,12 +80,14 @@ public class BusquedaNoInformada {
         }
         
         Collections.reverse(rama);
-        //rama.forEach(x->System.out.print(Arrays.toString(x.estado)));
-        //System.out.println("\n");
-        mostrarRuta(rama); 
+        mostrarRuta(rama, solucion.profundidad, contNodosExpandidosBfs, solucion.costo, tTotal); 
     }
     
-    public void mostrarRuta(ArrayList<Nodo> rama){
+    public void mostrarRuta(ArrayList<Nodo> rama, int profundidad, int nodos, int costo, long tiempo){
+        
+        for(int i=0;i<10;i++){
+            System.arraycopy(matriz[i], 0, matrizInicial[i], 0, 10);
+        }
         
         Mapa mapa = new Mapa();
         for(int i=1; i<rama.size()-1; i++){
@@ -94,12 +97,14 @@ public class BusquedaNoInformada {
                 }
             }   
         }
+       
         mapa.iniciarMapa();
-        mapa.pintarMapa(matriz);
+        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
     }
     
     public Nodo BFS(Nodo raiz){
-           
+
+        tInicio = System.currentTimeMillis();   
         Queue<Nodo> frontera;
         frontera=new LinkedList();
         frontera.add(raiz);
@@ -108,11 +113,11 @@ public class BusquedaNoInformada {
             
             Nodo actual;
             actual = frontera.remove();
-            
+                        
             if(matriz[actual.estado[0]][actual.estado[1]].equals("4")){
-                System.out.println("Solución");
-                System.out.println(contNodos);
                 System.out.println(actual.costo);
+                tFin = System.currentTimeMillis();
+                tTotal = tFin - tInicio;
                 return actual;
             }
             
@@ -120,17 +125,21 @@ public class BusquedaNoInformada {
             
             Queue<Nodo> sucesores;
             sucesores = Expandir(actual);
+            contNodosExpandidosBfs++;
             
             while(!sucesores.isEmpty()){
-                frontera.add(sucesores.remove());
+                frontera.add(sucesores.remove());    
             } 
         }
         System.out.println("fallo");
+        tFin = System.currentTimeMillis();
+        tTotal = tInicio - tFin;
+        System.out.println(tTotal);
         return null;
     }
     
     public Queue<Nodo> Expandir(Nodo nodo){
-        contNodos++;
+        
         int posX = nodo.estado[0];
         int posY = nodo.estado[1];
         Queue<Nodo> hijos;
