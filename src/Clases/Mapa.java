@@ -15,7 +15,7 @@ public class Mapa extends JFrame{
     URL urlMuro = this.getClass().getResource(pathMuro);  
     ImageIcon imgMuro = new ImageIcon(urlMuro);
     //Se recupera la imagen del robot
-    String pathRobot = "/images/robot.png";  
+    String pathRobot = "/images/robot.gif";  
     URL urlRobot = this.getClass().getResource(pathRobot);  
     ImageIcon imgRobot = new ImageIcon(urlRobot);
     //Se recupera la imagen del robot enemigo
@@ -26,6 +26,10 @@ public class Mapa extends JFrame{
     String pathItem = "/images/item.gif";  
     URL urlItem = this.getClass().getResource(pathItem);  
     ImageIcon imgItem = new ImageIcon(urlItem);
+    //Se recupera la imagen camino
+    String pathCamino = "/images/camino.gif";  
+    URL urlCamino = this.getClass().getResource(pathCamino);  
+    ImageIcon imgCamino = new ImageIcon(urlCamino);
     
     //Metodo encargado de iniciar el mapa
     public void iniciarMapa(){
@@ -74,6 +78,14 @@ public class Mapa extends JFrame{
                        item.setIcon(imgItem);
                        contenedor.add(item);
                      break;
+                    case "5":
+                       JLabel camino = new JLabel();
+                       camino.setIcon(imgCamino);
+                       contenedor.add(camino);
+                     break;
+                    default:
+                       JLabel defecto = new JLabel();
+                       contenedor.add(defecto);
                 }
             }
         }

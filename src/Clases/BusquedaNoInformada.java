@@ -5,11 +5,10 @@ import java.util.*;
 
 public class BusquedaNoInformada {
     
-    int cont = 0;
+    int contNodos = 0;
     int balas;
     int profundidad = 0;
     int costo = 0;
-    int posSol = 0;
     int estadoInicial[] = new int[2];
     Nodo raiz = new Nodo(estadoInicial,null,null,0,0,0);
     Nodo padre = new Nodo();
@@ -60,7 +59,7 @@ public class BusquedaNoInformada {
         
     }
     
-    public ArrayList<Nodo> obtenerRuta(){
+    public void obtenerRuta(){
         
         Nodo solucion = BFS(raiz);
         ArrayList<Nodo> rama = new ArrayList<>();
@@ -82,12 +81,19 @@ public class BusquedaNoInformada {
         Collections.reverse(rama);
         //rama.forEach(x->System.out.print(Arrays.toString(x.estado)));
         //System.out.println("\n");
-        return rama; 
+        mostrarRuta(rama); 
     }
     
     public void mostrarRuta(ArrayList<Nodo> rama){
         
         Mapa mapa = new Mapa();
+        for(int i=1; i<rama.size()-1; i++){
+            for(int j=0;j<10;j++){
+                for(int k=0;k<10;k++){
+                    matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";
+                }
+            }   
+        }
         mapa.iniciarMapa();
         mapa.pintarMapa(matriz);
     }
@@ -105,6 +111,8 @@ public class BusquedaNoInformada {
             
             if(matriz[actual.estado[0]][actual.estado[1]].equals("4")){
                 System.out.println("Solución");
+                System.out.println(contNodos);
+                System.out.println(actual.costo);
                 return actual;
             }
             
@@ -122,7 +130,7 @@ public class BusquedaNoInformada {
     }
     
     public Queue<Nodo> Expandir(Nodo nodo){
-        
+        contNodos++;
         int posX = nodo.estado[0];
         int posY = nodo.estado[1];
         Queue<Nodo> hijos;
@@ -138,6 +146,7 @@ public class BusquedaNoInformada {
             hijo.operador = "arriba";
             hijo.costo=nodo.costo+1;
             hijo.profundidad=nodo.profundidad+1;
+            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -148,9 +157,10 @@ public class BusquedaNoInformada {
             hijo.estado[0]= posX;
             hijo.estado[1]= posY+1;
             hijo.padre = nodo;
-            hijo.operador = "arriba";
+            hijo.operador = "derecha";
             hijo.costo=nodo.costo+1;
             hijo.profundidad=nodo.profundidad+1;
+            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -161,9 +171,10 @@ public class BusquedaNoInformada {
             hijo.estado[0]=posX+1;
             hijo.estado[1]= posY;
             hijo.padre = nodo;
-            hijo.operador = "arriba";
+            hijo.operador = "abajo";
             hijo.costo=nodo.costo+1;
             hijo.profundidad=nodo.profundidad+1;
+            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -174,9 +185,10 @@ public class BusquedaNoInformada {
             hijo.estado[0]= posX;
             hijo.estado[1]=posY-1;
             hijo.padre = nodo;
-            hijo.operador = "arriba";
+            hijo.operador = "izquierda";
             hijo.costo=nodo.costo+1;
             hijo.profundidad=nodo.profundidad+1;
+            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         //hijos.forEach(x->System.out.print(Arrays.toString(x.estado)));
