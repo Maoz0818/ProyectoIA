@@ -63,23 +63,22 @@ public class Mapa extends JFrame{
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
-        this.setBackground(Color.BLUE);
         
         fondo.setBackground(Color.WHITE);
         fondo.setLayout(null);
         
         ruta.setLayout(new GridLayout(10,10));
-        ruta.setBackground(Color.decode("#b963e0"));
+        ruta.setBackground(Color.decode("#a1a1a1"));
         ruta.setBorder(BorderFactory.createLineBorder(Color.black, 2));
         
         inicio.setLayout(new GridLayout(10,10));
-        inicio.setBackground(Color.decode("#b963e0"));
+        inicio.setBackground(Color.decode("#a1a1a1"));
         inicio.setBorder(BorderFactory.createLineBorder(Color.black, 2));
         
-        lProfundidad.setFont(new java.awt.Font("Arial", 0, 22));
-        lNodosExpandidos.setFont(new java.awt.Font("Arial", 0, 22));
-        lCosto.setFont(new java.awt.Font("Arial", 0, 22));
-        lTiempo.setFont(new java.awt.Font("Arial", 0, 22));
+        lProfundidad.setFont(new java.awt.Font("Arial", 0, 20));
+        lNodosExpandidos.setFont(new java.awt.Font("Arial", 0, 20));
+        lCosto.setFont(new java.awt.Font("Arial", 0, 20));
+        lTiempo.setFont(new java.awt.Font("Arial", 0, 20));
                 
         fondo.add(inicio);
         fondo.add(ruta);
@@ -94,12 +93,12 @@ public class Mapa extends JFrame{
         ruta.setBounds(260, 5, 600, 600);
         inicio.setBounds(5, 5, 250, 250);
         
-        lProfundidad.setBounds(5, 350, 250, 30);
-        lNodosExpandidos.setBounds(5, 400, 250, 30);
-        lCosto.setBounds(5, 450, 250, 30); 
-        lTiempo.setBounds(5, 500, 250, 30);
+        lProfundidad.setBounds(10, 340, 250, 30);
+        lNodosExpandidos.setBounds(10, 380, 250, 30);
+        lCosto.setBounds(10, 420, 250, 30); 
+        lTiempo.setBounds(10, 460, 250, 30);
         
-        this.setDefaultCloseOperation(Mapa3.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(Mapa.EXIT_ON_CLOSE);
     }
     
     //Metodo encargado de pintar el mapa a partir de la matriz que contiene en archivo .txt

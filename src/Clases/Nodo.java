@@ -1,6 +1,6 @@
 package Clases;
 
-public class Nodo {
+public class Nodo implements Comparable<Nodo> {
     
     int estado[]=new int[2];
     Nodo padre;
@@ -19,5 +19,15 @@ public class Nodo {
         this.costo=costo;
         this.balas=balas;
     }
-    
+
+    @Override
+    public int compareTo(Nodo o) {
+            if (costo < o.costo) {
+                return -1;
+            }
+            if (costo > o.costo) {
+                return 1;
+            }
+            return 0;
+    }  
 }

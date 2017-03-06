@@ -51,18 +51,16 @@ public class PreferentePorAmplitud {
                 }
             }
         }
-        
         raiz.padre = null;
         raiz.operador = null;
         raiz.costo = 0;
         raiz.profundidad = 0;
-        raiz.balas = balas;
-        
+        raiz.balas = balas; 
     }
     
     public void obtenerSolucion(){
         
-        Nodo solucion = BFS(raiz);
+        Nodo solucion = Busqueda(raiz);
         ArrayList<Nodo> rama = new ArrayList<>();
                         
         Queue<Nodo> aux;
@@ -102,7 +100,7 @@ public class PreferentePorAmplitud {
         mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
     }
     
-    public Nodo BFS(Nodo raiz){
+    public Nodo Busqueda(Nodo raiz){
 
         tInicio = System.currentTimeMillis();   
         Queue<Nodo> frontera;
@@ -115,7 +113,6 @@ public class PreferentePorAmplitud {
             actual = frontera.remove();
                         
             if(matriz[actual.estado[0]][actual.estado[1]].equals("4")){
-                System.out.println(actual.costo);
                 tFin = System.currentTimeMillis();
                 tTotal = tFin - tInicio;
                 return actual;
