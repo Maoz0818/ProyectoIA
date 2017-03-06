@@ -86,10 +86,10 @@ public class DeCostoUniforme {
         }
         
         Collections.reverse(rama);
-        mostrarRuta(rama, solucion.profundidad, contNodosExpandidosBfs, solucion.costo, tTotal); 
+        mostrarRuta(rama, solucion.profundidad, contNodosExpandidosBfs, solucion.costo, tTotal, solucion.balas); 
     }
     
-    public void mostrarRuta(ArrayList<Nodo> rama, int profundidad, int nodos, int costo, long tiempo){
+    public void mostrarRuta(ArrayList<Nodo> rama, int profundidad, int nodos, int costo, long tiempo, int balas){
         for(int i=0;i<10;i++){
             System.arraycopy(matriz[i], 0, matrizInicial[i], 0, 10);
         }
@@ -104,7 +104,7 @@ public class DeCostoUniforme {
         }
        
         mapa.iniciarMapa();
-        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
+        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
     }
     
     public Nodo Busqueda(Nodo raiz){
@@ -157,13 +157,20 @@ public class DeCostoUniforme {
             hijo.estado[1]= posY;
             hijo.padre = nodo;
             hijo.operador = "arriba";
-            if(matriz[posX-1][posY].equals("3")){
-                hijo.costo=nodo.costo+1+4;
-            }else{
+            if(matriz[posX-1][posY].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX-1][posY].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
             }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -175,13 +182,20 @@ public class DeCostoUniforme {
             hijo.estado[1]= posY+1;
             hijo.padre = nodo;
             hijo.operador = "derecha";
-            if(matriz[posX][posY+1].equals("3")){
-                hijo.costo=nodo.costo+1+4;
-            }else{
+            if(matriz[posX][posY+1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX][posY+1].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
             }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -193,13 +207,20 @@ public class DeCostoUniforme {
             hijo.estado[1]= posY;
             hijo.padre = nodo;
             hijo.operador = "abajo";
-            if(matriz[posX+1][posY].equals("3")){
-                hijo.costo=nodo.costo+1+4;
-            }else{
+            if(matriz[posX+1][posY].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX+1][posY].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
             }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -211,13 +232,20 @@ public class DeCostoUniforme {
             hijo.estado[1]=posY-1;
             hijo.padre = nodo;
             hijo.operador = "izquierda";
-            if(matriz[posX][posY-1].equals("3")){
-                hijo.costo=nodo.costo+1+4;
-            }else{
+            if(matriz[posX][posY-1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX][posY-1].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
             }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         //hijos.forEach(x->System.out.print(Arrays.toString(x.estado)));

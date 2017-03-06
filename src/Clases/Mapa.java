@@ -15,6 +15,7 @@ public class Mapa extends JFrame{
     JLabel lNodosExpandidos = new JLabel();
     JLabel lCosto = new JLabel();
     JLabel lTiempo = new JLabel();
+    JLabel lBalas = new JLabel();
     
     //Se recupera la imagen del muro
     String pathMuro = "/images/muro.png";  
@@ -79,6 +80,7 @@ public class Mapa extends JFrame{
         lNodosExpandidos.setFont(new java.awt.Font("Arial", 0, 20));
         lCosto.setFont(new java.awt.Font("Arial", 0, 20));
         lTiempo.setFont(new java.awt.Font("Arial", 0, 20));
+        lBalas.setFont(new java.awt.Font("Arial", 0, 20));
                 
         fondo.add(inicio);
         fondo.add(ruta);
@@ -86,6 +88,7 @@ public class Mapa extends JFrame{
         fondo.add(lProfundidad);
         fondo.add(lCosto);
         fondo.add(lTiempo);
+        fondo.add(lBalas);
         
         this.add(fondo);
         
@@ -97,17 +100,19 @@ public class Mapa extends JFrame{
         lNodosExpandidos.setBounds(10, 380, 250, 30);
         lCosto.setBounds(10, 420, 250, 30); 
         lTiempo.setBounds(10, 460, 250, 30);
+        lBalas.setBounds(10, 500, 250, 30);
         
         //this.setDefaultCloseOperation(Mapa.EXIT_ON_CLOSE);
     }
     
     //Metodo encargado de pintar el mapa a partir de la matriz que contiene en archivo .txt
-    public void pintarRuta(String matrizInicial[][], String matrizSolucion[][], int profundidad, int nodos, int costo, long tiempo, String titulo ){
+    public void pintarRuta(String matrizInicial[][], String matrizSolucion[][], int profundidad, int nodos, int costo, long tiempo, int balas, String titulo ){
         super.setTitle(titulo);
         lNodosExpandidos.setText("Nodos expandidos: "+nodos);
         lProfundidad.setText("Profundidad: "+profundidad);
         lCosto.setText("Costo: "+costo);
         lTiempo.setText("Tiempo: "+tiempo+" milisegundos");
+        lBalas.setText("Balas: "+balas);
         
         //Se recorre la matriz para obtener el valor en cada posición
         for(int i = 0;i < 10;i++){

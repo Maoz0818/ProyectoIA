@@ -78,10 +78,10 @@ public class PreferentePorAmplitud {
         }
         
         Collections.reverse(rama);
-        mostrarRuta(rama, solucion.profundidad, contNodosExpandidosBfs, solucion.costo, tTotal); 
+        mostrarRuta(rama, solucion.profundidad, contNodosExpandidosBfs, solucion.costo, tTotal, solucion.balas); 
     }
     
-    public void mostrarRuta(ArrayList<Nodo> rama, int profundidad, int nodos, int costo, long tiempo){
+    public void mostrarRuta(ArrayList<Nodo> rama, int profundidad, int nodos, int costo, long tiempo, int balas){
         
         for(int i=0;i<10;i++){
             System.arraycopy(matriz[i], 0, matrizInicial[i], 0, 10);
@@ -97,7 +97,7 @@ public class PreferentePorAmplitud {
         }
        
         mapa.iniciarMapa();
-        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
+        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
     }
     
     public Nodo Busqueda(Nodo raiz){
