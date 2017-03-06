@@ -16,6 +16,12 @@ public class Mapa extends JFrame{
     JLabel lCosto = new JLabel();
     JLabel lTiempo = new JLabel();
     JLabel lBalas = new JLabel();
+    JLabel lFondo = new JLabel();
+    
+    //Se recupera la imagen del fondo
+    String pathFondo = "/images/fondoMapa.jpg";  
+    URL urlFondo = this.getClass().getResource(pathFondo);  
+    ImageIcon imgFondo = new ImageIcon(urlFondo);
     
     //Se recupera la imagen del muro
     String pathMuro = "/images/muro.png";  
@@ -69,22 +75,28 @@ public class Mapa extends JFrame{
         this.setResizable(false);
         this.setVisible(true);
         
-        fondo.setBackground(Color.WHITE);
+        lFondo.setIcon(imgFondo);
+        
         fondo.setLayout(null);
         
         ruta.setLayout(new GridLayout(10,10));
         ruta.setBackground(Color.decode("#a1a1a1"));
-        ruta.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        ruta.setBorder(BorderFactory.createLineBorder(Color.decode("#ecedf1"), 2));
         
         inicio.setLayout(new GridLayout(10,10));
         inicio.setBackground(Color.decode("#a1a1a1"));
-        inicio.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        inicio.setBorder(BorderFactory.createLineBorder(Color.decode("#ecedf1"), 2));
         
         lProfundidad.setFont(new java.awt.Font("Arial", 0, 20));
+        lProfundidad.setForeground(Color.decode("#ecedf1"));
         lNodosExpandidos.setFont(new java.awt.Font("Arial", 0, 20));
+        lNodosExpandidos.setForeground(Color.decode("#ecedf1"));
         lCosto.setFont(new java.awt.Font("Arial", 0, 20));
+        lCosto.setForeground(Color.decode("#ecedf1"));
         lTiempo.setFont(new java.awt.Font("Arial", 0, 20));
+        lTiempo.setForeground(Color.decode("#ecedf1"));
         lBalas.setFont(new java.awt.Font("Arial", 0, 20));
+        lBalas.setForeground(Color.decode("#ecedf1"));
                 
         fondo.add(inicio);
         fondo.add(ruta);
@@ -93,6 +105,7 @@ public class Mapa extends JFrame{
         fondo.add(lCosto);
         fondo.add(lTiempo);
         fondo.add(lBalas);
+        fondo.add(lFondo);
         
         this.add(fondo);
         
@@ -105,6 +118,8 @@ public class Mapa extends JFrame{
         lCosto.setBounds(10, 420, 250, 30); 
         lTiempo.setBounds(10, 460, 250, 30);
         lBalas.setBounds(10, 500, 250, 30);
+        
+        lFondo.setBounds(0, 0, 872, 640);
         
         //this.setDefaultCloseOperation(Mapa.EXIT_ON_CLOSE);
     }
