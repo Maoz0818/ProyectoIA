@@ -80,5 +80,16 @@ public class Menu extends JFrame implements ActionListener{
             }
             DCU.obtenerSolucion();
         }
+        
+        //Accion profundidad
+        if(e.getSource()==profundidad){
+            PreferentePorProfundidad PPP = new PreferentePorProfundidad();
+            try {
+                PPP.guardarMapa();
+            } catch (IOException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            PPP.obtenerSolucion();
+        }
     }  
 }

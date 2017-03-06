@@ -37,6 +37,10 @@ public class Mapa extends JFrame{
     String pathCamino = "/images/camino.gif";  
     URL urlCamino = this.getClass().getResource(pathCamino);  
     ImageIcon imgCamino = new ImageIcon(urlCamino);
+    //Se recupera la imagen camino enemigo
+    String pathCaminoEnemigo = "/images/camino_enemigo.gif";  
+    URL urlCaminoEnemigo = this.getClass().getResource(pathCaminoEnemigo);  
+    ImageIcon imgCaminoEnemigo = new ImageIcon(urlCaminoEnemigo);
     
     //Se recupera la imagen del itemInicio
     String pathItemInicio = "/images/item.png";  
@@ -148,6 +152,11 @@ public class Mapa extends JFrame{
                        JLabel camino = new JLabel();
                        camino.setIcon(imgCamino);
                        ruta.add(camino);
+                     break;
+                    case "6":
+                       JLabel camino_enemigo = new JLabel();
+                       camino_enemigo.setIcon(imgCaminoEnemigo);
+                       ruta.add(camino_enemigo);
                      break;
                     default:
                        JLabel defecto = new JLabel();

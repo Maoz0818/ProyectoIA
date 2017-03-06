@@ -24,8 +24,8 @@ public class PreferentePorAmplitud {
         int numlinea = 0;
         
         //FileReader file = new FileReader("/home/mauricio/Descargas/Prueba1.txt");
-        //FileReader file = new FileReader("C:\\Users\\temp.DESKTOP-IB18RSF\\Downloads\\Prueba1.txt");
-        FileReader file = new FileReader("C:\\Users\\Admin\\Downloads\\Prueba1.txt");
+        FileReader file = new FileReader("C:\\Users\\temp.DESKTOP-IB18RSF\\Downloads\\Prueba1.txt");
+        //FileReader file = new FileReader("C:\\Users\\Admin\\Downloads\\Prueba1.txt");
         try (BufferedReader buffer = new BufferedReader(file)) {
 
             while((linea = buffer.readLine())!=null) {
@@ -67,8 +67,7 @@ public class PreferentePorAmplitud {
         aux=new LinkedList();
         aux.add(solucion);
         
-        while(!aux.isEmpty()){
-            
+        while(!aux.isEmpty()){  
             Nodo actual;
             actual = aux.remove();
             rama.add(actual);
@@ -89,12 +88,19 @@ public class PreferentePorAmplitud {
         
         Mapa mapa = new Mapa();
         for(int i=1; i<rama.size()-1; i++){
-            for(int j=0;j<10;j++){
-                for(int k=0;k<10;k++){
-                    matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";
-                }
-            }   
+            if(matriz[rama.get(i).estado[0]][rama.get(i).estado[1]].equals("3")){
+               matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "6";
+            }else{
+                matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";
+            }  
         }
+        
+        for(int j=0;j<10;j++){
+                for(int k=0;k<10;k++){
+                    System.out.print(matriz[j][k]+" ");
+                }
+            System.out.print("\n");
+        } 
        
         mapa.iniciarMapa();
         mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
