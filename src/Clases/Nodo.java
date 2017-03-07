@@ -7,16 +7,18 @@ public class Nodo implements Comparable<Nodo> {
     String operador;
     int profundidad;
     int costo;
+    int heuristica;
     int balas;
     
     public Nodo(){}
     
-    public Nodo(int[] estado, Nodo padre, String operador, int profundidad, int costo, int balas){
+    public Nodo(int[] estado, Nodo padre, String operador, int profundidad, int costo, int heuristica, int balas){
         this.estado=estado;
         this.padre=padre;
         this.operador=operador;
         this.profundidad=profundidad;
         this.costo=costo;
+        this.heuristica=heuristica;
         this.balas=balas;
     }
 

@@ -12,7 +12,7 @@ public class PreferentePorProfundidad {
     int profundidad = 0;
     int costo = 0;
     int estadoInicial[] = new int[2];
-    Nodo raiz = new Nodo(estadoInicial,null,null,0,0,0);
+    Nodo raiz = new Nodo(estadoInicial,null,null,0,0,0,0);
     Nodo padre = new Nodo();
     String matriz[][] = new String[10][10];
     String matrizInicial[][] = new String[10][10];
@@ -153,7 +153,7 @@ public class PreferentePorProfundidad {
         //Acción arriba
         if(posX-1 >= 0 && posX-1 < 10 && posY >= 0 && posY < 10 && !matriz[posX-1][posY].equals("1") && !evitarCiclos(nodo, posX-1, posY)){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
             hijo.estado[0]= posX-1;
             hijo.estado[1]= posY;
             hijo.padre = nodo;
@@ -167,7 +167,7 @@ public class PreferentePorProfundidad {
         //Accion derecha
         if(posX >= 0 && posX < 10 && posY+1 >= 0 && posY+1 < 10 && !matriz[posX][posY+1].equals("1") && !evitarCiclos(nodo, posX, posY+1)){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
             hijo.estado[0]= posX;
             hijo.estado[1]= posY+1;
             hijo.padre = nodo;
@@ -181,7 +181,7 @@ public class PreferentePorProfundidad {
         //Accion abajo
         if(posX+1 >= 0 && posX+1 < 10 && posY >= 0 && posY < 10 && !matriz[posX+1][posY].equals("1") && !evitarCiclos(nodo, posX+1, posY)){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
             hijo.estado[0]=posX+1;
             hijo.estado[1]= posY;
             hijo.padre = nodo;
@@ -195,7 +195,7 @@ public class PreferentePorProfundidad {
         //Accion izquierda
         if(posX >= 0 && posX < 10 && posY-1 >= 0 && posY-1 < 10 && !matriz[posX][posY-1].equals("1") && !evitarCiclos(nodo, posX, posY-1)){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
             hijo.estado[0]= posX;
             hijo.estado[1]=posY-1;
             hijo.padre = nodo;

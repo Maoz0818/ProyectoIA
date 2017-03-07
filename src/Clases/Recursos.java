@@ -10,12 +10,23 @@ public class Recursos {
     String aux[][] = new String[10][10];
     String matriz[][] = new String[10][10];
     int balas;
+    int[] estado = new int[2];
+    int[] auxEstado = new int[2];
     
     public Recursos(){}
     
-    public Recursos(String[][] matriz, int balas){
+    public Recursos(String[][] matriz, int balas, int[] estado){
         this.matriz=matriz;
         this.balas=balas;
+        this.estado=estado;
+    }
+
+    public int[] getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int[] estado) {
+        this.estado = estado;
     }
     
     public String[][] getMatriz() {
@@ -40,8 +51,8 @@ public class Recursos {
         int numlinea = 0;
  
         //FileReader file = new FileReader("/home/mauricio/Descargas/Prueba1.txt");
-        //FileReader file = new FileReader("C:\\Users\\temp.DESKTOP-IB18RSF\\Downloads\\Prueba1.txt");
-        FileReader file = new FileReader("C:\\Users\\Admin\\Downloads\\Prueba1.txt");
+        FileReader file = new FileReader("C:\\Users\\temp.DESKTOP-IB18RSF\\Downloads\\Prueba1.txt");
+        //FileReader file = new FileReader("C:\\Users\\Admin\\Downloads\\Prueba1.txt");
         try (BufferedReader buffer = new BufferedReader(file)) {
             while((linea = buffer.readLine())!=null) {
                 if(numlinea != 0){
@@ -55,6 +66,15 @@ public class Recursos {
             buffer.close();           
         }
         this.setMatriz(aux);
+        for(int i=0; i<10; i++){
+            for(int j=0; j<10; j++){
+                if(aux[i][j].equals("4")){
+                    auxEstado[0] = i;
+                    auxEstado[1] = j;
+                }
+            }
+        }
+        this.setEstado(auxEstado);
     } 
     
 }

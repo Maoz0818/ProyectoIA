@@ -118,12 +118,12 @@ public class Mapa extends JFrame{
         ruta.setBounds(260, 5, 600, 600);
         inicio.setBounds(5, 5, 250, 250);
         
-        titulo.setBounds(25, 350, 250, 20);
-        lNodosExpandidos.setBounds(25, 395, 250, 20);
-        lProfundidad.setBounds(25, 420, 250, 20);
-        lCosto.setBounds(25, 445, 250, 20); 
-        lTiempo.setBounds(25, 470, 250, 20);
-        lBalas.setBounds(25, 495, 250, 20);
+        titulo.setBounds(20, 350, 250, 20);
+        lNodosExpandidos.setBounds(20, 395, 250, 20);
+        lProfundidad.setBounds(20, 420, 250, 20);
+        lCosto.setBounds(20, 445, 250, 20); 
+        lTiempo.setBounds(20, 470, 250, 20);
+        lBalas.setBounds(20, 495, 250, 20);
         
         lFondo.setBounds(0, 0, 872, 640);
         
@@ -133,11 +133,11 @@ public class Mapa extends JFrame{
     //Metodo encargado de pintar el mapa a partir de la matriz que contiene en archivo .txt
     public void pintarRuta(String matrizInicial[][], String matrizSolucion[][], int profundidad, int nodos, int costo, long tiempo, int balas, String titulo ){
         super.setTitle(titulo);
-        lNodosExpandidos.setText("Nodos expandidos ------ "+nodos);
-        lProfundidad.setText("Profundidad --------------- "+profundidad);
-        lCosto.setText("Costo total ----------------- "+costo);
-        lTiempo.setText("Tiempo de cómputo ----- "+tiempo+" ms");
-        lBalas.setText("Balas restantes ------------ "+balas);
+        lNodosExpandidos.setText("Nodos expandidos ----- "+nodos);
+        lProfundidad.setText("Profundidad -------------- "+profundidad);
+        lCosto.setText("Costo total ---------------- "+costo);
+        lTiempo.setText("Tiempo de cómputo ---- "+tiempo+" ms");
+        lBalas.setText("Balas restantes ----------- "+balas);
         
         //Se recorre la matriz para obtener el valor en cada posición
         for(int i = 0;i < 10;i++){

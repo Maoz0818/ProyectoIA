@@ -1,11 +1,11 @@
 package Clases;
 
-import java.io.*;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+    import java.io.*;
+    import java.util.*;
+    import java.util.logging.Level;
+    import java.util.logging.Logger;
 
-public class DeCostoUniforme {
+public class Voraz {
     
     int contNodosExpandidosBfs = 0;
     int balas;
@@ -88,6 +88,12 @@ public class DeCostoUniforme {
        
         mapa.iniciarMapa();
         mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA NO INFORMADA -> DE COSTO UNIFORME");
+    }
+    
+    public void asignarHeuristica(Nodo nodo, String matrizInicial[][]){
+        int heuristica = 0;
+        
+        
     }
     
     public Nodo Busqueda(Nodo raiz){
