@@ -10,6 +10,7 @@ public class Mapa extends JFrame{
     JPanel ruta = new JPanel();
     JPanel inicio = new JPanel();
     JPanel fondo = new JPanel();
+    JLabel titulo = new JLabel("RESUMEN DE BUSQUEDA");
     JLabel lProfundidad = new JLabel();
     JLabel lNodosExpandidos = new JLabel();
     JLabel lCosto = new JLabel();
@@ -86,6 +87,8 @@ public class Mapa extends JFrame{
         inicio.setBackground(Color.decode("#a1a1a1"));
         inicio.setBorder(BorderFactory.createLineBorder(Color.decode("#ecedf1"), 2));
         
+        titulo.setFont(new java.awt.Font("Arial", 0, 15));
+        titulo.setForeground(Color.decode("#ecedf1"));
         lProfundidad.setFont(new java.awt.Font("Arial", 0, 16));
         lProfundidad.setForeground(Color.decode("#ecedf1"));
         lNodosExpandidos.setFont(new java.awt.Font("Arial", 0, 16));
@@ -99,11 +102,14 @@ public class Mapa extends JFrame{
                 
         fondo.add(inicio);
         fondo.add(ruta);
+        
+        fondo.add(titulo);
         fondo.add(lNodosExpandidos);
         fondo.add(lProfundidad);
         fondo.add(lCosto);
         fondo.add(lTiempo);
         fondo.add(lBalas);
+        
         fondo.add(lFondo);
         
         this.add(fondo);
@@ -112,11 +118,12 @@ public class Mapa extends JFrame{
         ruta.setBounds(260, 5, 600, 600);
         inicio.setBounds(5, 5, 250, 250);
         
-        lNodosExpandidos.setBounds(10, 320, 250, 30);
-        lProfundidad.setBounds(10, 345, 250, 30);
-        lCosto.setBounds(10, 370, 250, 30); 
-        lTiempo.setBounds(10, 395, 250, 30);
-        lBalas.setBounds(10, 420, 250, 30);
+        titulo.setBounds(25, 350, 250, 20);
+        lNodosExpandidos.setBounds(25, 395, 250, 20);
+        lProfundidad.setBounds(25, 420, 250, 20);
+        lCosto.setBounds(25, 445, 250, 20); 
+        lTiempo.setBounds(25, 470, 250, 20);
+        lBalas.setBounds(25, 495, 250, 20);
         
         lFondo.setBounds(0, 0, 872, 640);
         
@@ -126,11 +133,11 @@ public class Mapa extends JFrame{
     //Metodo encargado de pintar el mapa a partir de la matriz que contiene en archivo .txt
     public void pintarRuta(String matrizInicial[][], String matrizSolucion[][], int profundidad, int nodos, int costo, long tiempo, int balas, String titulo ){
         super.setTitle(titulo);
-        lNodosExpandidos.setText("Nodos expandidos: "+nodos);
-        lProfundidad.setText("Profundidad: "+profundidad);
-        lCosto.setText("Costo: "+costo);
-        lTiempo.setText("Tiempo: "+tiempo+" ms");
-        lBalas.setText("Balas: "+balas);
+        lNodosExpandidos.setText("Nodos expandidos ------ "+nodos);
+        lProfundidad.setText("Profundidad --------------- "+profundidad);
+        lCosto.setText("Costo total ----------------- "+costo);
+        lTiempo.setText("Tiempo de cómputo ----- "+tiempo+" ms");
+        lBalas.setText("Balas restantes ------------ "+balas);
         
         //Se recorre la matriz para obtener el valor en cada posición
         for(int i = 0;i < 10;i++){
