@@ -2,6 +2,8 @@ package Clases;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PreferentePorProfundidad {
     
@@ -16,32 +18,18 @@ public class PreferentePorProfundidad {
     String matrizInicial[][] = new String[10][10];
     long tInicio = 0, tFin = 0, tTotal = 0;
 
-    public void guardarMapa() throws FileNotFoundException, IOException {
+    public void obtenerSolucion(){
         
-        String linea;
-        String delimitador = " ";
-        int numlinea = 0;
-        
-        //FileReader file = new FileReader("/home/mauricio/Descargas/Prueba1.txt");
-        FileReader file = new FileReader("C:\\Users\\temp.DESKTOP-IB18RSF\\Downloads\\Prueba1.txt");
-        //FileReader file = new FileReader("C:\\Users\\Admin\\Downloads\\Prueba1.txt");
-        try (BufferedReader buffer = new BufferedReader(file)) {
-
-            while((linea = buffer.readLine())!=null) {
-               
-                if(numlinea != 0){
-                    String a[] = linea.split(delimitador);
-                    System.arraycopy(a, 0, matriz[numlinea-1], 0, a.length);
-
-                }else{
-                    balas = Integer.parseInt(linea);
-                }
-
-                numlinea++;
-            }
-
-            buffer.close();           
+        Recursos pruebas = new Recursos();
+        try {
+            pruebas.guardarMapa();
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        matriz = pruebas.getMatriz();
+        balas = pruebas.getBalas();
+        
         for(int i=0;i<10;i++){
             for(int j=0;j<10;j++){
                 if(matriz[i][j].equals("2")){
@@ -55,11 +43,9 @@ public class PreferentePorProfundidad {
         raiz.costo = 0;
         raiz.profundidad = 0;
         raiz.balas = balas; 
-    }
-    
-    public void obtenerSolucion(){
-        
+
         Nodo solucion = Busqueda(raiz);
+        if(solucion != null){
         ArrayList<Nodo> rama = new ArrayList<>();
                         
         Queue<Nodo> aux;
@@ -76,7 +62,13 @@ public class PreferentePorProfundidad {
         }
         
         Collections.reverse(rama);
-        mostrarRuta(rama, solucion.profundidad, contNodosExpandidosBfs, solucion.costo, tTotal, solucion.balas); 
+        mostrarRuta(rama, solucion.profundidad, contNodosExpandidosBfs, solucion.costo, tTotal, solucion.balas);
+        }
+        else{
+            Fallo fallo = new Fallo();
+            fallo.iniciarFallo();
+            fallo.pintarFallo(matriz, "PREFERENTE POR PROFUNDIDAD");
+        }
     }
     
     public void mostrarRuta(ArrayList<Nodo> rama, int profundidad, int nodos, int costo, long tiempo, int balas){
@@ -85,19 +77,20 @@ public class PreferentePorProfundidad {
             System.arraycopy(matriz[i], 0, matrizInicial[i], 0, 10);
         }
         
+        
         Mapa mapa = new Mapa();
         for(int i=1; i<rama.size()-1; i++){
             if(matriz[rama.get(i).estado[0]][rama.get(i).estado[1]].equals("3")){
                matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "6";
             }else{
-                matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";
+                matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";                
             }  
         }
        
         mapa.iniciarMapa();
-        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA NO INFORMADA -> PREFERENTE POR AMPLITUD");
+        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA NO INFORMADA -> PREFERENTE POR PROFUNDIDAD");
     }
-    
+        
     public boolean evitarCiclos(Nodo nodo, int posX, int posY){  
         ArrayList<int[]> rama = new ArrayList<>();
         Queue<Nodo> aux;
@@ -145,10 +138,8 @@ public class PreferentePorProfundidad {
                 frontera.push(sucesores.remove());    
             } 
         }
-        System.out.println("fallo");
         tFin = System.currentTimeMillis();
         tTotal = tInicio - tFin;
-        System.out.println(tTotal);
         return null;
     }
     
@@ -213,10 +204,7 @@ public class PreferentePorProfundidad {
             hijo.profundidad=nodo.profundidad+1;
             hijo.balas=nodo.balas;
             hijos.add(hijo);
-        }
-        
-        hijos.forEach(x->System.out.print(Arrays.toString(x.estado)));
-        System.out.println("\n");
+        }        
         return hijos;
     }
     

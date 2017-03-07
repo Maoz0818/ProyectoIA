@@ -1,6 +1,5 @@
 package Clases;
 
-//import java.io.*;
 import java.awt.*;
 import java.net.URL;
 import javax.swing.*;
@@ -87,15 +86,15 @@ public class Mapa extends JFrame{
         inicio.setBackground(Color.decode("#a1a1a1"));
         inicio.setBorder(BorderFactory.createLineBorder(Color.decode("#ecedf1"), 2));
         
-        lProfundidad.setFont(new java.awt.Font("Arial", 0, 20));
+        lProfundidad.setFont(new java.awt.Font("Arial", 0, 16));
         lProfundidad.setForeground(Color.decode("#ecedf1"));
-        lNodosExpandidos.setFont(new java.awt.Font("Arial", 0, 20));
+        lNodosExpandidos.setFont(new java.awt.Font("Arial", 0, 16));
         lNodosExpandidos.setForeground(Color.decode("#ecedf1"));
-        lCosto.setFont(new java.awt.Font("Arial", 0, 20));
+        lCosto.setFont(new java.awt.Font("Arial", 0, 16));
         lCosto.setForeground(Color.decode("#ecedf1"));
-        lTiempo.setFont(new java.awt.Font("Arial", 0, 20));
+        lTiempo.setFont(new java.awt.Font("Arial", 0, 16));
         lTiempo.setForeground(Color.decode("#ecedf1"));
-        lBalas.setFont(new java.awt.Font("Arial", 0, 20));
+        lBalas.setFont(new java.awt.Font("Arial", 0, 15));
         lBalas.setForeground(Color.decode("#ecedf1"));
                 
         fondo.add(inicio);
@@ -113,11 +112,11 @@ public class Mapa extends JFrame{
         ruta.setBounds(260, 5, 600, 600);
         inicio.setBounds(5, 5, 250, 250);
         
-        lProfundidad.setBounds(10, 340, 250, 30);
-        lNodosExpandidos.setBounds(10, 380, 250, 30);
-        lCosto.setBounds(10, 420, 250, 30); 
-        lTiempo.setBounds(10, 460, 250, 30);
-        lBalas.setBounds(10, 500, 250, 30);
+        lNodosExpandidos.setBounds(10, 320, 250, 30);
+        lProfundidad.setBounds(10, 345, 250, 30);
+        lCosto.setBounds(10, 370, 250, 30); 
+        lTiempo.setBounds(10, 395, 250, 30);
+        lBalas.setBounds(10, 420, 250, 30);
         
         lFondo.setBounds(0, 0, 872, 640);
         
@@ -130,7 +129,7 @@ public class Mapa extends JFrame{
         lNodosExpandidos.setText("Nodos expandidos: "+nodos);
         lProfundidad.setText("Profundidad: "+profundidad);
         lCosto.setText("Costo: "+costo);
-        lTiempo.setText("Tiempo: "+tiempo+" milisegundos");
+        lTiempo.setText("Tiempo: "+tiempo+" ms");
         lBalas.setText("Balas: "+balas);
         
         //Se recorre la matriz para obtener el valor en cada posición

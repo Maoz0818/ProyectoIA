@@ -27,6 +27,8 @@ public class Menu extends JFrame implements ActionListener{
     JButton voraz = new JButton("Voraz");
     JButton a_estrella = new JButton("A*");
     
+    //JButton prueba = new JButton("Prueba");
+    
     //Metodo encargado de iniciar el mapa
     public void iniciarMenu(){
         
@@ -60,6 +62,8 @@ public class Menu extends JFrame implements ActionListener{
         a_estrella.addActionListener(this);
         a_estrella.setBackground(Color.decode("#ecedf1"));
         
+        //prueba.addActionListener(this);
+        
         fondo.add(noInfo);
         fondo.add(info);
         fondo.add(amplitud);
@@ -67,6 +71,9 @@ public class Menu extends JFrame implements ActionListener{
         fondo.add(profundidad);
         fondo.add(voraz);
         fondo.add(a_estrella);
+        
+        //fondo.add(prueba);
+        
         fondo.add(lFondo);
         
         this.add(fondo);
@@ -79,6 +86,9 @@ public class Menu extends JFrame implements ActionListener{
         info.setBounds(100, 240, 250, 30);
         voraz.setBounds(110, 280, 190, 30);
         a_estrella.setBounds(110, 320, 190, 30);
+        
+        //prueba.setBounds(110, 360, 190, 30);
+        
         lFondo.setBounds(0, 0, 400, 500);
         
         this.setDefaultCloseOperation(Mapa.EXIT_ON_CLOSE);
@@ -90,34 +100,38 @@ public class Menu extends JFrame implements ActionListener{
         //Accion por aplitud
         if(e.getSource()==amplitud){
             PreferentePorAmplitud PPA = new PreferentePorAmplitud();
-            try {
-                PPA.guardarMapa();
-            } catch (IOException ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            }
             PPA.obtenerSolucion();
         }
         
         //Accion costo
         if(e.getSource()==costo){
             DeCostoUniforme DCU = new DeCostoUniforme();
-            try {
-                DCU.guardarMapa();
-            } catch (IOException ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            }
             DCU.obtenerSolucion();
         }
         
         //Accion profundidad
         if(e.getSource()==profundidad){
             PreferentePorProfundidad PPP = new PreferentePorProfundidad();
-            try {
-                PPP.guardarMapa();
-            } catch (IOException ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            }
             PPP.obtenerSolucion();
         }
+        
+//        //Accion para pruebas
+//        if(e.getSource()==prueba){
+//            Recursos pruebas = new Recursos();
+//            try {
+//                pruebas.guardarMapa();
+//            } catch (IOException ex) {
+//                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            String aux[][];
+//            aux = pruebas.getMatriz();
+//            for(int i=0; i<10; i++){
+//                for(int j=0; j<10; j++){
+//                    System.out.print(aux[i][j]+" ");
+//                }
+//                System.out.print("\n");
+//            }
+//            System.out.println(pruebas.getBalas());
+//        }
     }  
 }
