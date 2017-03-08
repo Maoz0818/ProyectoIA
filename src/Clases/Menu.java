@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class Menu extends JFrame implements ActionListener{
     JButton voraz = new JButton("Voraz");
     JButton a_estrella = new JButton("A*");
     
-    //JButton prueba = new JButton("Prueba");
+    JButton prueba = new JButton("Prueba");
     
     //Metodo encargado de iniciar el mapa
     public void iniciarMenu(){
@@ -62,7 +63,7 @@ public class Menu extends JFrame implements ActionListener{
         a_estrella.addActionListener(this);
         a_estrella.setBackground(Color.decode("#ecedf1"));
         
-        //prueba.addActionListener(this);
+        prueba.addActionListener(this);
         
         fondo.add(noInfo);
         fondo.add(info);
@@ -72,7 +73,7 @@ public class Menu extends JFrame implements ActionListener{
         fondo.add(voraz);
         fondo.add(a_estrella);
         
-        //fondo.add(prueba);
+        fondo.add(prueba);
         
         fondo.add(lFondo);
         
@@ -87,7 +88,7 @@ public class Menu extends JFrame implements ActionListener{
         voraz.setBounds(110, 280, 190, 30);
         a_estrella.setBounds(110, 320, 190, 30);
         
-        //prueba.setBounds(110, 360, 190, 30);
+        prueba.setBounds(110, 360, 190, 30);
         
         lFondo.setBounds(0, 0, 400, 500);
         
@@ -115,23 +116,36 @@ public class Menu extends JFrame implements ActionListener{
             PPP.obtenerSolucion();
         }
         
-//        //Accion para pruebas
-//        if(e.getSource()==prueba){
-//            Recursos pruebas = new Recursos();
-//            try {
-//                pruebas.guardarMapa();
-//            } catch (IOException ex) {
-//                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            String aux[][];
-//            aux = pruebas.getMatriz();
-//            for(int i=0; i<10; i++){
-//                for(int j=0; j<10; j++){
-//                    System.out.print(aux[i][j]+" ");
-//                }
-//                System.out.print("\n");
-//            }
-//            System.out.println(pruebas.getBalas());
-//        }
+        //Accion voraz
+        if(e.getSource()==voraz){
+            Voraz V = new Voraz();
+            V.obtenerSolucion();
+        }
+        
+        //Accion A*
+        if(e.getSource()==a_estrella){
+            AEstrella AE = new AEstrella();
+            AE.obtenerSolucion();
+        }
+        
+        //Accion para pruebas
+        if(e.getSource()==prueba){
+            Recursos pruebas = new Recursos();
+            try {
+                pruebas.guardarMapa();
+            } catch (IOException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String aux[][];
+            aux = pruebas.getMatriz();
+            for(int i=0; i<10; i++){
+                for(int j=0; j<10; j++){
+                    System.out.print(aux[i][j]+" ");
+                }
+                System.out.print("\n");
+            }
+            System.out.println(pruebas.getBalas());
+            System.out.println(Arrays.toString(pruebas.getEstado()));
+        }
     }  
 }

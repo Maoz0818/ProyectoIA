@@ -12,7 +12,8 @@ public class Voraz {
     int profundidad = 0;
     int costo = 0;
     int estadoInicial[] = new int[2];
-    Nodo raiz = new Nodo(estadoInicial,null,null,0,0,0,0);
+    int estadoMeta[] = new int[2];
+    Nodo raiz = new Nodo(estadoInicial,null,null,0,0,0,0,0,1);
     Nodo padre = new Nodo();
     String matriz[][] = new String[10][10];
     String matrizInicial[][] = new String[10][10];
@@ -37,13 +38,18 @@ public class Voraz {
                     raiz.estado[0]=i;
                     raiz.estado[1]=j;
                 }
+                if(matriz[i][j].equals("4")){
+                    estadoMeta[0]=i;
+                    estadoMeta[1]=j;
+                }
             }
         }
         raiz.padre = null;
         raiz.operador = null;
         raiz.costo = 0;
         raiz.profundidad = 0;
-        raiz.balas = balas; 
+        raiz.balas = balas;
+        
 
         Nodo solucion = Busqueda(raiz);
         if(solucion != null){
@@ -68,15 +74,14 @@ public class Voraz {
         else{
             Fallo fallo = new Fallo();
             fallo.iniciarFallo();
-            fallo.pintarFallo(matriz, "DE COSTO UNIFORME");
+            fallo.pintarFallo(matriz, "VORAZ");
         }
     }
     
     public void mostrarRuta(ArrayList<Nodo> rama, int profundidad, int nodos, int costo, long tiempo, int balas){
         for(int i=0;i<10;i++){
             System.arraycopy(matriz[i], 0, matrizInicial[i], 0, 10);
-        }
-        
+        } 
         Mapa mapa = new Mapa();
         for(int i=1; i<rama.size()-1; i++){
             if(matriz[rama.get(i).estado[0]][rama.get(i).estado[1]].equals("3")){
@@ -85,19 +90,21 @@ public class Voraz {
                 matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";
             }  
         }
-       
         mapa.iniciarMapa();
-        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA NO INFORMADA -> DE COSTO UNIFORME");
+        mapa.pintarRuta(matrizInicial, matriz, profundidad, nodos, costo, tiempo, balas, "BUSQUEDA INFORMADA -> VORAZ");
     }
     
-    public void asignarHeuristica(Nodo nodo, String matrizInicial[][]){
-        int heuristica = 0;
-        
-        
+    public void asignarHeuristica(Nodo nodo){
+        int heuristica;
+        int x1 = nodo.estado[0];
+        int y1 = nodo.estado[1];
+        heuristica = Math.abs(estadoMeta[0]-x1) + Math.abs(estadoMeta[1]-y1);
+        nodo.heuristica = heuristica;
     }
     
     public Nodo Busqueda(Nodo raiz){
-            
+        
+        asignarHeuristica(raiz);
         tInicio = System.currentTimeMillis();
         ArrayList<Nodo> frontera = new ArrayList();
         frontera.add(raiz);
@@ -107,6 +114,7 @@ public class Voraz {
             Nodo actual;
             Collections.sort(frontera);
             actual = frontera.remove(0);
+            System.out.println(actual.heuristica+" "+actual.g);
                         
             if(matriz[actual.estado[0]][actual.estado[1]].equals("4")){
                 tFin = System.currentTimeMillis();
@@ -140,7 +148,7 @@ public class Voraz {
         //Accion derecha
         if(posX >= 0 && posX < 10 && posY+1 >= 0 && posY+1 < 10 && !matriz[posX][posY+1].equals("1") && !visitados[posX][posY+1]){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]= posX;
             hijo.estado[1]= posY+1;
             hijo.padre = nodo;
@@ -159,13 +167,14 @@ public class Voraz {
                 }
             }
             hijo.profundidad=nodo.profundidad+1;
+            asignarHeuristica(hijo);
             hijos.add(hijo);
         }
         
         //Accion abajo
         if(posX+1 >= 0 && posX+1 < 10 && posY >= 0 && posY < 10 && !matriz[posX+1][posY].equals("1") && !visitados[posX+1][posY]){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]=posX+1;
             hijo.estado[1]= posY;
             hijo.padre = nodo;
@@ -184,13 +193,14 @@ public class Voraz {
                 }
             }
             hijo.profundidad=nodo.profundidad+1;
+            asignarHeuristica(hijo);
             hijos.add(hijo);
         }
         
         //Accion izquierda
         if(posX >= 0 && posX < 10 && posY-1 >= 0 && posY-1 < 10 && !matriz[posX][posY-1].equals("1") && !visitados[posX][posY-1]){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]= posX;
             hijo.estado[1]=posY-1;
             hijo.padre = nodo;
@@ -209,13 +219,14 @@ public class Voraz {
                 }
             }
             hijo.profundidad=nodo.profundidad+1;
+            asignarHeuristica(hijo);
             hijos.add(hijo);
         }
         
         //Acción arriba
         if(posX-1 >= 0 && posX-1 < 10 && posY >= 0 && posY < 10 && !matriz[posX-1][posY].equals("1") && !visitados[posX-1][posY]){
             int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0,0);
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]= posX-1;
             hijo.estado[1]= posY;
             hijo.padre = nodo;
@@ -234,11 +245,11 @@ public class Voraz {
                 }
             }
             hijo.profundidad=nodo.profundidad+1;
+            asignarHeuristica(hijo);
             hijos.add(hijo);
         }
         //hijos.forEach(x->System.out.print(Arrays.toString(x.estado)));
         //System.out.println("\n");
         return hijos;
-    }
-    
+    }   
 }
