@@ -78,11 +78,18 @@ public class DeCostoUniforme {
         }
         
         Mapa mapa = new Mapa();
-        for(int i=1; i<rama.size()-1; i++){
-            if(matriz[rama.get(i).estado[0]][rama.get(i).estado[1]].equals("3")){
-               matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "6";
-            }else{
-                matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";
+        for(int i=1; i<rama.size(); i++){
+            String num = matriz[rama.get(i).estado[0]][rama.get(i).estado[1]];
+            switch(num){
+                case "3":
+                    matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "6";
+                    break;
+                case "4":
+                    matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "7";
+                    break;
+                default:
+                    matriz[rama.get(i).estado[0]][rama.get(i).estado[1]] = "5";
+                    break;
             }  
         }
        
