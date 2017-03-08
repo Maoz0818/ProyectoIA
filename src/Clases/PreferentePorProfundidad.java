@@ -158,9 +158,20 @@ public class PreferentePorProfundidad {
             hijo.estado[1]= posY;
             hijo.padre = nodo;
             hijo.operador = "arriba";
-            hijo.costo=nodo.costo+1;
+            if(matriz[posX-1][posY].equals("3") && nodo.balas != 0){
+                hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX-1][posY].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
+            }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -172,9 +183,20 @@ public class PreferentePorProfundidad {
             hijo.estado[1]= posY+1;
             hijo.padre = nodo;
             hijo.operador = "derecha";
-            hijo.costo=nodo.costo+1;
+            if(matriz[posX][posY+1].equals("3") && nodo.balas != 0){
+                hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX][posY+1].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
+            }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -186,9 +208,20 @@ public class PreferentePorProfundidad {
             hijo.estado[1]= posY;
             hijo.padre = nodo;
             hijo.operador = "abajo";
-            hijo.costo=nodo.costo+1;
+            if(matriz[posX+1][posY].equals("3") && nodo.balas != 0){
+                hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX+1][posY].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
+            }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }
         
@@ -200,9 +233,20 @@ public class PreferentePorProfundidad {
             hijo.estado[1]=posY-1;
             hijo.padre = nodo;
             hijo.operador = "izquierda";
-            hijo.costo=nodo.costo+1;
+            if(matriz[posX][posY-1].equals("3") && nodo.balas != 0){
+                hijo.costo=nodo.costo+1;
+                nodo.balas-=1;
+                hijo.balas=nodo.balas;
+            }else{
+                if(matriz[posX][posY-1].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
+            }
             hijo.profundidad=nodo.profundidad+1;
-            hijo.balas=nodo.balas;
             hijos.add(hijo);
         }        
         return hijos;

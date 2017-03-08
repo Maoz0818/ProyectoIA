@@ -114,7 +114,7 @@ public class Voraz {
             Nodo actual;
             Collections.sort(frontera);
             actual = frontera.remove(0);
-            System.out.println(actual.heuristica+" "+actual.g);
+            //System.out.println(actual.heuristica+" "+actual.g);
                         
             if(matriz[actual.estado[0]][actual.estado[1]].equals("4")){
                 tFin = System.currentTimeMillis();
