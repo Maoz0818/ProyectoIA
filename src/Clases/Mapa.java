@@ -131,12 +131,10 @@ public class Mapa extends JFrame{
         lBalas.setBounds(20, 495, 250, 20);
         
         lFondo.setBounds(0, 0, 872, 640);
-        
-        //this.setDefaultCloseOperation(Mapa.EXIT_ON_CLOSE);
     }
     
     //Metodo encargado de pintar el mapa a partir de la matriz que contiene en archivo .txt
-    public void pintarRuta(String matrizInicial[][], String matrizSolucion[][], int profundidad, int nodos, int costo, long tiempo, int balas, String titulo ){
+    public void pintarRuta(String matrizInicial[][], String matrizSolucion[][], int profundidad, int nodos, int costo, long tiempo, int balas, String titulo){
         super.setTitle(titulo);
         lNodosExpandidos.setText("Nodos expandidos ----- "+nodos);
         lProfundidad.setText("Profundidad -------------- "+profundidad);

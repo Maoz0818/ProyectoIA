@@ -16,7 +16,6 @@ public class Voraz {
     Nodo padre = new Nodo();
     String matriz[][] = new String[10][10];
     String matrizInicial[][] = new String[10][10];
-    boolean visitados[][] = new boolean[10][10];
     long tInicio = 0, tFin = 0, tTotal = 0;
     
     public void obtenerSolucion(){
@@ -104,6 +103,15 @@ public class Voraz {
         nodo.heuristica = heuristica;
     }
     
+    public boolean eviteDevolverse(Nodo nodo, int posX, int posY){
+        if(nodo.padre!=null){
+            if(nodo.padre.estado[0] == posX && nodo.padre.estado[1] == posY){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public Nodo Busqueda(Nodo raiz){
         Recursos pruebas = new Recursos();
             try {
@@ -130,8 +138,6 @@ public class Voraz {
                 return actual;
             }
             
-            visitados[actual.estado[0]][actual.estado[1]]=true;
-            
             Queue<Nodo> sucesores;
             sucesores = Expandir(actual);
             contNodosExpandidosBfs++;
@@ -153,7 +159,7 @@ public class Voraz {
         hijos=new LinkedList();
         
         //Acción arriba
-        if(posX-1 >= 0 && posX-1 < 10 && posY >= 0 && posY < 10 && !matriz[posX-1][posY].equals("1") && !visitados[posX-1][posY]){
+        if(posX-1 >= 0 && posX-1 < 10 && posY >= 0 && posY < 10 && !matriz[posX-1][posY].equals("1") && eviteDevolverse(nodo, posX-1, posY)){
             int estado[] = new int[2];
             Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]= posX-1;
@@ -180,7 +186,7 @@ public class Voraz {
         
         
         //Accion derecha
-        if(posX >= 0 && posX < 10 && posY+1 >= 0 && posY+1 < 10 && !matriz[posX][posY+1].equals("1") && !visitados[posX][posY+1]){
+        if(posX >= 0 && posX < 10 && posY+1 >= 0 && posY+1 < 10 && !matriz[posX][posY+1].equals("1") && eviteDevolverse(nodo, posX, posY+1)){
             int estado[] = new int[2];
             Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]= posX;
@@ -206,7 +212,7 @@ public class Voraz {
         }
         
         //Accion abajo
-        if(posX+1 >= 0 && posX+1 < 10 && posY >= 0 && posY < 10 && !matriz[posX+1][posY].equals("1") && !visitados[posX+1][posY]){
+        if(posX+1 >= 0 && posX+1 < 10 && posY >= 0 && posY < 10 && !matriz[posX+1][posY].equals("1") && eviteDevolverse(nodo, posX+1, posY)){
             int estado[] = new int[2];
             Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]=posX+1;
@@ -232,7 +238,7 @@ public class Voraz {
         }
         
         //Accion izquierda
-        if(posX >= 0 && posX < 10 && posY-1 >= 0 && posY-1 < 10 && !matriz[posX][posY-1].equals("1") && !visitados[posX][posY-1]){
+        if(posX >= 0 && posX < 10 && posY-1 >= 0 && posY-1 < 10 && !matriz[posX][posY-1].equals("1") && eviteDevolverse(nodo, posX, posY-1)){
             int estado[] = new int[2];
             Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
             hijo.estado[0]= posX;

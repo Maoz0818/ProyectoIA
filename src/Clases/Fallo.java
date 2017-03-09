@@ -75,8 +75,6 @@ public class Fallo extends JFrame{
         lAlgoritmo.setBounds(22, 60, 280, 30);
                 
         lFondo.setBounds(0, 0, 280, 390);
-        
-        //this.setDefaultCloseOperation(Mapa.EXIT_ON_CLOSE);
     }
     
     //Metodo encargado de pintar el mapa a partir de la matriz que contiene en archivo .txt
@@ -89,6 +87,12 @@ public class Fallo extends JFrame{
         }
         if(titulo.equals("PREFERENTE POR AMPLITUD")){
             lAlgoritmo.setBounds(40, 60, 280, 30);        
+        }
+        if(titulo.equals("A*")){
+            lAlgoritmo.setBounds(130, 60, 280, 30);        
+        }
+        if(titulo.equals("VORAZ")){
+            lAlgoritmo.setBounds(110, 60, 280, 30);        
         }
         lAlgoritmo.setText(titulo);
         
