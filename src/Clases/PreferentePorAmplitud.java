@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 public class PreferentePorAmplitud {
     
     int contNodosExpandidosBfs = 0;
-    int balas;
     int profundidad = 0;
     int costo = 0;
     int estadoInicial[] = new int[2];
@@ -29,7 +28,6 @@ public class PreferentePorAmplitud {
         }
         
         matriz = pruebas.getMatriz();
-        balas = pruebas.getBalas();
         
         for(int i=0;i<10;i++){
             for(int j=0;j<10;j++){
@@ -43,7 +41,6 @@ public class PreferentePorAmplitud {
         raiz.operador = null;
         raiz.costo = 0;
         raiz.profundidad = 0;
-        raiz.balas = balas; 
 
         Nodo solucion = Busqueda(raiz);
         if(solucion != null){
@@ -99,7 +96,13 @@ public class PreferentePorAmplitud {
     }
         
     public Nodo Busqueda(Nodo raiz){
-
+        Recursos pruebas = new Recursos();
+            try {
+            pruebas.guardarMapa();
+                } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        raiz.balas = pruebas.getBalas(); 
         tInicio = System.currentTimeMillis();   
         Queue<Nodo> frontera;
         frontera=new LinkedList();
@@ -147,8 +150,8 @@ public class PreferentePorAmplitud {
             hijo.operador = "arriba";
             if(matriz[posX-1][posY].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX-1][posY].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -172,8 +175,8 @@ public class PreferentePorAmplitud {
             hijo.operador = "derecha";
             if(matriz[posX][posY+1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX][posY+1].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -197,8 +200,8 @@ public class PreferentePorAmplitud {
             hijo.operador = "abajo";
             if(matriz[posX+1][posY].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX+1][posY].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -222,8 +225,8 @@ public class PreferentePorAmplitud {
             hijo.operador = "izquierda";
             if(matriz[posX][posY-1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX][posY-1].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;

@@ -51,8 +51,8 @@ public class Recursos {
         int numlinea = 0;
  
         //FileReader file = new FileReader("/home/mauricio/Descargas/Prueba1.txt");
-        //FileReader file = new FileReader("C:\\Users\\temp.DESKTOP-IB18RSF\\Downloads\\Prueba1.txt");
-        FileReader file = new FileReader("C:\\Users\\Admin\\Downloads\\Prueba1.txt");
+        FileReader file = new FileReader("C:\\Users\\temp.DESKTOP-IB18RSF\\Downloads\\Prueba1.txt");
+        //FileReader file = new FileReader("C:\\Users\\Admin\\Downloads\\Prueba1.txt");
         try (BufferedReader buffer = new BufferedReader(file)) {
             while((linea = buffer.readLine())!=null) {
                 if(numlinea != 0){

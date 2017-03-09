@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 public class DeCostoUniforme {
     
     int contNodosExpandidosBfs = 0;
-    //int balas;
     int profundidad = 0;
     int costo = 0;
     int estadoInicial[] = new int[2];
@@ -29,7 +28,6 @@ public class DeCostoUniforme {
         }
         
         matriz = pruebas.getMatriz();
-        //balas = pruebas.getBalas();
         
         for(int i=0;i<10;i++){
             for(int j=0;j<10;j++){
@@ -42,8 +40,7 @@ public class DeCostoUniforme {
         raiz.padre = null;
         raiz.operador = null;
         raiz.costo = 0;
-        raiz.profundidad = 0;
-        //raiz.balas = balas; 
+        raiz.profundidad = 0; 
 
         Nodo solucion = Busqueda(raiz);
         if(solucion != null){
@@ -152,8 +149,8 @@ public class DeCostoUniforme {
             hijo.operador = "arriba";
             if(matriz[posX-1][posY].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX-1][posY].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -177,8 +174,8 @@ public class DeCostoUniforme {
             hijo.operador = "derecha";
             if(matriz[posX][posY+1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX][posY+1].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -202,8 +199,8 @@ public class DeCostoUniforme {
             hijo.operador = "abajo";
             if(matriz[posX+1][posY].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX+1][posY].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -227,8 +224,8 @@ public class DeCostoUniforme {
             hijo.operador = "izquierda";
             if(matriz[posX][posY-1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX][posY-1].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;

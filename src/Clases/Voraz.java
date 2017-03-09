@@ -1,14 +1,13 @@
 package Clases;
 
-    import java.io.*;
-    import java.util.*;
-    import java.util.logging.Level;
-    import java.util.logging.Logger;
+import java.io.*;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Voraz {
     
     int contNodosExpandidosBfs = 0;
-    int balas;
     int profundidad = 0;
     int costo = 0;
     int estadoInicial[] = new int[2];
@@ -28,9 +27,7 @@ public class Voraz {
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         matriz = pruebas.getMatriz();
-        balas = pruebas.getBalas();
         
         for(int i=0;i<10;i++){
             for(int j=0;j<10;j++){
@@ -47,9 +44,7 @@ public class Voraz {
         raiz.padre = null;
         raiz.operador = null;
         raiz.costo = 0;
-        raiz.profundidad = 0;
-        raiz.balas = balas;
-        
+        raiz.profundidad = 0;   
 
         Nodo solucion = Busqueda(raiz);
         if(solucion != null){
@@ -110,7 +105,13 @@ public class Voraz {
     }
     
     public Nodo Busqueda(Nodo raiz){
-        
+        Recursos pruebas = new Recursos();
+            try {
+            pruebas.guardarMapa();
+                } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        raiz.balas = pruebas.getBalas(); 
         asignarHeuristica(raiz);
         tInicio = System.currentTimeMillis();
         ArrayList<Nodo> frontera = new ArrayList();
@@ -151,6 +152,32 @@ public class Voraz {
         Queue<Nodo> hijos;
         hijos=new LinkedList();
         
+        //Acción arriba
+        if(posX-1 >= 0 && posX-1 < 10 && posY >= 0 && posY < 10 && !matriz[posX-1][posY].equals("1") && !visitados[posX-1][posY]){
+            int estado[] = new int[2];
+            Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
+            hijo.estado[0]= posX-1;
+            hijo.estado[1]= posY;
+            hijo.padre = nodo;
+            hijo.operador = "arriba";
+            if(matriz[posX-1][posY].equals("3") && nodo.balas != 0){
+                hijo.costo=nodo.costo+1;
+                hijo.balas=nodo.balas;
+                hijo.balas-=1;
+            }else{
+                if(matriz[posX-1][posY].equals("3") && nodo.balas == 0){
+                    hijo.costo=nodo.costo+1+4;
+                    hijo.balas=nodo.balas;
+                }else{
+                    hijo.costo=nodo.costo+1;
+                    hijo.balas=nodo.balas;
+                }
+            }
+            hijo.profundidad=nodo.profundidad+1;
+            asignarHeuristica(hijo);
+            hijos.add(hijo);
+        }
+        
         
         //Accion derecha
         if(posX >= 0 && posX < 10 && posY+1 >= 0 && posY+1 < 10 && !matriz[posX][posY+1].equals("1") && !visitados[posX][posY+1]){
@@ -162,8 +189,8 @@ public class Voraz {
             hijo.operador = "derecha";
             if(matriz[posX][posY+1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX][posY+1].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -188,8 +215,8 @@ public class Voraz {
             hijo.operador = "abajo";
             if(matriz[posX+1][posY].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX+1][posY].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
@@ -214,36 +241,10 @@ public class Voraz {
             hijo.operador = "izquierda";
             if(matriz[posX][posY-1].equals("3") && nodo.balas != 0){
                 hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
                 hijo.balas=nodo.balas;
+                hijo.balas-=1;
             }else{
                 if(matriz[posX][posY-1].equals("3") && nodo.balas == 0){
-                    hijo.costo=nodo.costo+1+4;
-                    hijo.balas=nodo.balas;
-                }else{
-                    hijo.costo=nodo.costo+1;
-                    hijo.balas=nodo.balas;
-                }
-            }
-            hijo.profundidad=nodo.profundidad+1;
-            asignarHeuristica(hijo);
-            hijos.add(hijo);
-        }
-        
-        //Acción arriba
-        if(posX-1 >= 0 && posX-1 < 10 && posY >= 0 && posY < 10 && !matriz[posX-1][posY].equals("1") && !visitados[posX-1][posY]){
-            int estado[] = new int[2];
-            Nodo hijo = new Nodo(estado,null,null,0,0,0,0,0,1);
-            hijo.estado[0]= posX-1;
-            hijo.estado[1]= posY;
-            hijo.padre = nodo;
-            hijo.operador = "arriba";
-            if(matriz[posX-1][posY].equals("3") && nodo.balas != 0){
-                hijo.costo=nodo.costo+1;
-                nodo.balas-=1;
-                hijo.balas=nodo.balas;
-            }else{
-                if(matriz[posX-1][posY].equals("3") && nodo.balas == 0){
                     hijo.costo=nodo.costo+1+4;
                     hijo.balas=nodo.balas;
                 }else{

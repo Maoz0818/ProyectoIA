@@ -7,20 +7,20 @@ public class Nodo implements Comparable<Nodo> {
     int profundidad;
     int costo;
     int heuristica;
-    int g;
+    int f;
     int balas;
     int compare;
     
     public Nodo(){}
     
-    public Nodo(int[] estado, Nodo padre, String operador, int profundidad, int costo, int heuristica, int g, int balas, int compare){
+    public Nodo(int[] estado, Nodo padre, String operador, int profundidad, int costo, int heuristica, int f, int balas, int compare){
         this.estado=estado;
         this.padre=padre;
         this.operador=operador;
         this.profundidad=profundidad;
         this.costo=costo;
         this.heuristica=heuristica;
-        this.g=g;
+        this.f=f;
         this.balas=balas;
         this.compare=compare;
     }
@@ -51,10 +51,10 @@ public class Nodo implements Comparable<Nodo> {
             
             case 2:
                 //System.out.println("compareTo con g");
-                if (g < o.g) {
+                if (f < o.f) {
                 return -1;
             }
-            if (g > o.g) {
+            if (f > o.f) {
                 return 1;
             }
                 break;
